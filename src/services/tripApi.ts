@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TripFilterResponse, TripQuery, TripResponse, } from '../types/tripTypes';
+import { TripFilterResponse, TripQuery, TripResponse, } from '../types/user/tripTypes';
 import { getValidToken } from '../utils/authUtils';
-import { BookingData, BookingResponse, UserTripHistoryResponse } from '../types/bookingTypes';
+import { BookingData, BookingResponse, UserTripHistoryResponse } from '../types/user/bookingTypes';
 
 export const tripApi = createApi({
   reducerPath: 'tripApi',

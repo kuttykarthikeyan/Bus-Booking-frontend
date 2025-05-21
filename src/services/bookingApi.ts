@@ -7,7 +7,7 @@ import {
   UserCancelSeatRequest,
   UserCancelSeatResponse,
   UserTripHistoryResponse
-} from '../types/bookingTypes';
+} from '../types/user/bookingTypes';
 
 export const bookingApi = createApi({
   reducerPath: 'bookingApi',

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetTripByIdQuery } from "../services/tripApi";
 import { useBookSeatsMutation } from "../services/bookingApi";
-import { BookingData } from "../types/bookingTypes";
+import { BookingData } from "../types/user/bookingTypes";
 
 
 const SeatLayout = () => {

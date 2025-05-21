@@ -1,22 +1,20 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store'; // adjust this import path to your project
 
-const isTokenValid = (): boolean => {
-  const authTokenString = localStorage.getItem('authToken');
-  if (!authTokenString) return false;
-
-  try {
-    const { token, expiry } = JSON.parse(authTokenString);
-    if (typeof token !== 'string' || typeof expiry !== 'number') return false;
-
-    return token.length > 0 && Date.now() < expiry;
-  } catch {
-    return false;
-  }
+const isTokenValid = (token: string | null): boolean => {
+  return !!token && token.length > 0;
 };
 
 const ProtectedRoute = ({ children }: { children: React.ReactElement }) => {
-  return isTokenValid() ? children : <Navigate to="/login" replace />;
+  const { userToken, isAuthenticated } = useSelector((state: RootState) => state.user);
+
+  if (!isAuthenticated || !isTokenValid(userToken)) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;

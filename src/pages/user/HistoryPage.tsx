@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import BookingCard from '../components/BookingCard';
+import Navbar from '../../components/Navbar';
+import BookingCard from '../../components/BookingCard';
 
 const HistoryPage: React.FC = () => {
   return (

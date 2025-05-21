@@ -1,8 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { LoginUser } from "../../types/userTypes";
+import { LoginUser } from "../../types/user/userTypes";
 import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from '../../services/userApi';
-
+import { loginSuccess } from '../../store/user/userSlice';
+import { useDispatch } from "react-redux";
 export default function LoginForm() {
   const [formData, setFormData] = useState<LoginUser>({
     email: '',
@@ -10,7 +11,7 @@ export default function LoginForm() {
   });
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser] = useLoginUserMutation();
 
@@ -28,19 +29,19 @@ export default function LoginForm() {
       return;
     }
     
-    try {
+   try {
       setLoading(true);
       const response = await loginUser(formData).unwrap();
-    
-      if (response.data.token) {
-        const expiryTime = new Date().getTime() + 24 * 60 * 60 * 1000; 
-        const authData = {
-          token: response.data.token,
-          expiry: expiryTime,
-        };
-      
-        localStorage.setItem("authToken", JSON.stringify(authData));
-        navigate("/trip")
+    console.log(response)
+    console.log(response.data.user,response.data.token)
+        if (response.data.user) {
+        dispatch(loginSuccess({
+  user: response.data.user,
+  token: response.data.token
+}));
+
+
+        navigate("/trip");
       } else {
         setError('Login failed: No token received');
       }
@@ -48,7 +49,7 @@ export default function LoginForm() {
       setError(err.data?.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
-    }
+    } 
   };
 
   const navigateToRegister = () => {

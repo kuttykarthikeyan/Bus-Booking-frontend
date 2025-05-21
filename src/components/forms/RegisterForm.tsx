@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, useEffect } from 'react';
 import { User, Lock, Phone, UserCheck, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { RegisterUser } from '../../types/userTypes';
+import { RegisterUser } from '../../types/user/userTypes';
 import { useRegisterUserMutation } from '../../services/userApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../store/user/userSlice';
+import { registerSuccess } from '../../store/user/userSlice';
 import { RootState } from '../../store/index';
 import { useNavigate } from 'react-router-dom';
 
@@ -73,11 +73,6 @@ export default function RegistrationForm() {
     if (submitError) setSubmitError(null);
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate('/login');
-    }
-  }, [currentUser, navigate]);
 
   const validateForm = () => {
     const { valid, errors: newErrors } = validateRegistrationForm(formData);
@@ -91,16 +86,20 @@ export default function RegistrationForm() {
     if (!validateForm()) return;
 
     try {
-      const res = await registerUser(formData).unwrap();
-      console.log('Registration successful:', res);
-      dispatch(setUser(res.data));
-      setFormData(initialFormData);
-      
+      const response = await registerUser(formData).unwrap();
+          
+        if (response.data.user) {
+        dispatch(registerSuccess({
+         user: response.data.user,
+         token: response.data.token
+        }));
+        navigate('/trip');
+        }
     } catch (err: any) {
       console.error('Registration error:', err);
       setSubmitError(err?.data?.message || 'Registration failed. Please try again.');
     }
-  };
+  }
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

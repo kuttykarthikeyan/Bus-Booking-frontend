@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { tripApi } from '../../services/tripApi';
-import { Trip, TripFilterResponse, TripQuery, TripResponse } from '../../types/tripTypes';
+import { Trip, TripFilterResponse, TripQuery, TripResponse } from '../../types/user/tripTypes';
 import { getValidToken } from '../../utils/authUtils';
 import { HttpStatusCode } from 'axios';
 

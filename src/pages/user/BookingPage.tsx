@@ -1,5 +1,5 @@
-import Navbar from '../components/Navbar';
-import SeatLayout from '../components/SeatLayout';
+import Navbar from '../../components/Navbar';
+import SeatLayout from '../../components/SeatLayout';
 
 
 const BookingPage =()=>{

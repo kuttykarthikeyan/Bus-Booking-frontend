@@ -1,7 +1,7 @@
 import RegistrationForm, { validateRegistrationForm } from '../forms/RegisterForm';
 import { render, screen, fireEvent, waitFor,logRoles } from '@testing-library/react';
 import * as userApi from '../../services/userApi';
-import { RegisterUser } from '../../types/userTypes';
+import { RegisterUser } from '../../types/user/userTypes';
 export interface RegisterForm {
     name: string;
     email: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import TripCard from '../TripCard';
-import { Trip, Bus } from '../../types/tripTypes';
+import { Trip, Bus } from '../../types/user/tripTypes';
 import { useNavigate } from 'react-router-dom';
 
 jest.mock('react-router-dom', () => ({

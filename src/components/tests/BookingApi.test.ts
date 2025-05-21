@@ -4,7 +4,7 @@ import { getValidToken } from '../../utils/authUtils';
 import {
   BookingResponse,
   UserTripHistoryResponse,
-} from '../../types/bookingTypes';
+} from '../../types/user/bookingTypes';
 
 const mockGetValidToken = getValidToken as jest.MockedFunction<typeof getValidToken>;
 jest.mock('../../utils/authUtils', () => ({

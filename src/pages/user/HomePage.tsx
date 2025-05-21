@@ -1,6 +1,6 @@
 import React from 'react';
-import TripSearch from '../components/TripSearch';
-import Navbar from '../components/Navbar';
+import TripSearch from '../../components/TripSearch';
+import Navbar from '../../components/Navbar';
 
 const Home: React.FC = () => {
   return (

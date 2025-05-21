@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGetTripsByFilterMutation } from '../services/tripApi';
-import { TripQuery } from '../types/tripTypes';
+import { TripQuery } from '../types/user/tripTypes';
 import TripCard from './TripCard';
 import { MapPin, CreditCard, Users, Search } from 'lucide-react';
 

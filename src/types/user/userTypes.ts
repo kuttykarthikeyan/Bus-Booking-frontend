@@ -1,5 +1,3 @@
-// src/types/userTypes.ts
-
 export interface RegisterUser {
   name: string;
   email: string;
@@ -19,20 +17,21 @@ export interface User {
   email: string;
   phone: string;
   role: string;
-  createdAt: string;
+
 }
 
 export interface LoginResponse {
   success: boolean;
   message: string;
-  data: User;
-  token: string;
+  data:{
+    user: User
+    token: string;
 }
+  };
 
-export interface UserState {
+
+export interface  UserState {
   currentUser: User | null;
-  token: string | null;
+  userToken: string | null;
   isAuthenticated: boolean;
-  isLoading: boolean;
-  error: string | null;
 }

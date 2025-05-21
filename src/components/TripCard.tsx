@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trip } from '../types/tripTypes';
+import { Trip } from '../types/user/tripTypes';
 import { Clock, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

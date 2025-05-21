@@ -1,5 +1,5 @@
 import userReducer, { setUser } from '../../store/user/userSlice';
-import { User } from '../../types/userTypes';
+import { User } from '../../types/user/userTypes';
 
 describe('userSlice', () => {
   const initialState = {

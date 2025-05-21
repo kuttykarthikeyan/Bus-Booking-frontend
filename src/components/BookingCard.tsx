@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlertMessage, BookedTrip } from "../types/bookingTypes";
+import { AlertMessage, BookedTrip } from "../types/user/bookingTypes";
 import { useHistoryQuery, useCancelSeatsMutation } from "../services/bookingApi";
 
 const formatDate = (dateString: string): string => {

@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes,Outlet } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import TripPage from '../pages/HomePage';
-import RegisterPage from '../pages/RegisterPage';
-import BookingPage from '../pages/BookingPage';
-import HistoryPage from '../pages/HistoryPage';
+import LoginPage from '../pages/auth/LoginPage';
+import TripPage from '../pages/user/HomePage';
+import RegisterPage from '../pages/auth/RegisterPage';
+import BookingPage from '../pages/user/BookingPage';
+import HistoryPage from '../pages/user/HistoryPage';
 import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {

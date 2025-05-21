@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import BookingCard from "../BookingCard";
 import { useHistoryQuery, useCancelSeatsMutation } from "../../services/bookingApi";
-import { BookedTrip } from "../../types/bookingTypes";
+import { BookedTrip } from "../../types/user/bookingTypes";
 import { act } from "react";
 
 jest.mock("../../services/bookingApi");

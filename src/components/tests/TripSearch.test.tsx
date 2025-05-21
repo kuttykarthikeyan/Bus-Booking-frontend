@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import TripSearch from '../TripSearch';
 import { useGetTripsByFilterMutation } from '../../services/tripApi';
-import { TripQuery } from '../../types/tripTypes';
+import { TripQuery } from '../../types/user/tripTypes';
 
 // Mock the API hook
 jest.mock('../../services/tripApi', () => ({

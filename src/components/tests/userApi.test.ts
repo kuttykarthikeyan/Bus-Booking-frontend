@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from '../../services/userApi';
-import { RegisterUser, LoginUser } from '../../types/userTypes';
+import { RegisterUser, LoginUser } from '../../types/user/userTypes';
 import { userBaseQuery } from '../../services/userApi';
 global.fetch = jest.fn();
 
