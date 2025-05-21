@@ -1,0 +1,12 @@
+frontend/playwright-report
+node_modules
+tests-examples
+babel.config.js
+eslint.config.js
+test-results
+jest.config.ts
+jest.polyfills.js
+
+mongo-keyfile
+README.md
+vite.config.ts

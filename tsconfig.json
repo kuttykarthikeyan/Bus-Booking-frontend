@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "jsx": "react-jsx",               // Enable JSX support (for React 17+)
+    "esModuleInterop": true,          // Fixes import React issue
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],            // Ensure source files & tests are included
+  "exclude": ["node_modules"]
+}
