@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserState } from '../../types/user/userTypes';
 
-
 const initialState: UserState = {
   currentUser: null,
   userToken: localStorage.getItem('authToken'),
   isAuthenticated: !!localStorage.getItem('authToken'), 
 };
-
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -35,6 +33,5 @@ const userSlice = createSlice({
    
   },
 });
-
 export const { loginSuccess, registerSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;

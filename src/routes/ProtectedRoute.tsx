@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../store'; // adjust this import path to your project
+import type { RootState } from '../store';
 
 const isTokenValid = (token: string | null): boolean => {
   return !!token && token.length > 0;

@@ -4,6 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from '../../services/userApi';
 import { loginSuccess } from '../../store/user/userSlice';
 import { useDispatch } from "react-redux";
+import {
+  FetchBaseQueryError
+} from '@reduxjs/toolkit/query';
+import {
+  SerializedError
+} from '@reduxjs/toolkit';
+
+function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
+  return typeof error === 'object' &&
+    error !== null &&
+    'status' in error;
+}
+
+function isSerializedError(error: unknown): error is SerializedError {
+  return typeof error === 'object' &&
+    error !== null &&
+    'message' in error;
+}
+
 export default function LoginForm() {
   const [formData, setFormData] = useState<LoginUser>({
     email: '',
@@ -28,28 +47,34 @@ export default function LoginForm() {
       setError('Please enter both email and password');
       return;
     }
-    
    try {
-      setLoading(true);
-      const response = await loginUser(formData).unwrap();
-    console.log(response)
-    console.log(response.data.user,response.data.token)
-        if (response.data.user) {
-        dispatch(loginSuccess({
-  user: response.data.user,
-  token: response.data.token
-}));
+  setLoading(true);
+  const response = await loginUser(formData).unwrap();
 
+  if (response.data.user) {
+    dispatch(loginSuccess({
+      user: response.data.user,
+      token: response.data.token
+    }));
 
-        navigate("/trip");
-      } else {
-        setError('Login failed: No token received');
-      }
-    } catch (err: any) {
-      setError(err.data?.message || 'Login failed. Please try again.');
-    } finally {
-      setLoading(false);
-    } 
+    navigate("/trip");
+  } else {
+    setError('Login failed: No token received');
+  }
+
+} catch (err) {
+  if (isFetchBaseQueryError(err)) {
+    const errorMessage = (err.data as { message?: string })?.message || 'Login failed.';
+    setError(errorMessage);
+  } else if (isSerializedError(err)) {
+    setError(err.message || 'An unexpected error occurred.');
+  } else {
+    // Fallback
+    setError('An unknown error occurred.');
+  }
+} finally {
+  setLoading(false);
+}
   };
 
   const navigateToRegister = () => {

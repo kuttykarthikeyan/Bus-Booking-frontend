@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState,FC } from 'react';
 import { useGetTripsByFilterMutation } from '../services/tripApi';
 import { TripQuery } from '../types/user/tripTypes';
 import TripCard from './TripCard';
@@ -6,7 +6,7 @@ import { MapPin, CreditCard, Users, Search } from 'lucide-react';
 
 
 
-const TripSearch: React.FC = () => {
+const TripSearch: FC = () => {
   const [query, setQuery] = useState<TripQuery>({
     source: '',
     destination: '',

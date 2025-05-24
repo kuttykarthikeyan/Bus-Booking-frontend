@@ -1,8 +1,7 @@
-import React from 'react';
 import TripSearch from '../../components/TripSearch';
 import Navbar from '../../components/Navbar';
 
-const Home: React.FC = () => {
+const HomePage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
@@ -39,4 +38,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

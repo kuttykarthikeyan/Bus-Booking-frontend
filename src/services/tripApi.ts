@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TripFilterResponse, TripQuery, TripResponse, } from '../types/user/tripTypes';
-import { getValidToken } from '../utils/authUtils';
 import { BookingData, BookingResponse, UserTripHistoryResponse } from '../types/user/bookingTypes';
 
 export const tripApi = createApi({
@@ -9,7 +8,8 @@ export const tripApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8000/api/user/',
     prepareHeaders: (headers) => {
-      const token = getValidToken();
+      const token =localStorage.getItem('authToken')
+
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

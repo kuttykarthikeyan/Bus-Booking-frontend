@@ -1,4 +1,4 @@
-import React from 'react';
+import {FC} from 'react';
 import { Trip } from '../types/user/tripTypes';
 import { Clock, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ interface TripCardProps {
   trip: Trip;
 }
 
-const TripCard: React.FC<TripCardProps> = ({ trip }) => {
+const TripCard: FC<TripCardProps> = ({ trip }) => {
   const navigate=useNavigate()
 
   const formatDate = (dateString: string) => {

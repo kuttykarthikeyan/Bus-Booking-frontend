@@ -1,6 +1,5 @@
 // bookingApi.js
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getValidToken } from '../utils/authUtils';
 import {
   BookingData,
   BookingResponse,
@@ -16,7 +15,7 @@ export const bookingApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8000/api/user/',
     prepareHeaders: (headers) => {
-      const token = getValidToken();
+      const token =localStorage.getItem('authToken')
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

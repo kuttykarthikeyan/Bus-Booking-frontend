@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { AlertMessage, BookedTrip } from "../types/user/bookingTypes";
 import { useHistoryQuery, useCancelSeatsMutation } from "../services/bookingApi";
 
@@ -124,15 +124,13 @@ const BookingCard = () => {
               <p className="text-gray-500">Booking ID: {booking._id.slice(-8)}</p>
               <p className="text-gray-500">Trip ID: {booking.trip_id._id.slice(-8)}</p>
             </div>
-            <div
-              className="px-3 py-1 rounded-full text-sm font-medium capitalize"
-              style={{
-                backgroundColor:
-                  booking.booking_status === "confirmed" ? "#dcfce7" : "#fee2e2",
-                color:
-                  booking.booking_status === "confirmed" ? "#166534" : "#991b1b",
-              }}
-            >
+         <div
+  className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
+    booking.booking_status === "confirmed"
+      ? "bg-green-200 text-green-900"
+      : "bg-red-200 text-red-900"
+  }`}
+>
               {booking.booking_status}
             </div>
           </div>
@@ -170,13 +168,18 @@ const BookingCard = () => {
             <div>
               <p className="text-sm text-gray-500">Payment Status</p>
               <p
-                className={`font-medium capitalize ${
-                  booking.payment_status === "completed"
-                    ? "text-green-600"
-                    : booking.payment_status === "refunded"
-                    ? "text-blue-600"
-                    : "text-amber-600"
-                }`}
+               className={`font-medium capitalize ${
+  booking.payment_status === "completed"
+    ? "text-green-600"
+    : booking.payment_status === "refunded"
+    ? "text-blue-600"
+    : booking.payment_status === "pending"
+    ? "text-yellow-700"
+    : booking.payment_status === "cancelled"
+    ? "text-red-700"
+    : "text-gray-600"
+}`}
+
               >
                 {booking.payment_status}
               </p>
@@ -190,7 +193,7 @@ const BookingCard = () => {
             <div className="mt-4 pt-4 border-t border-gray-200">
               <button
                 onClick={() => handleToggleExpand(booking._id)}
-                className="px-4 py-2 bg-red-50 text-red-600 rounded hover:bg-red-100 font-medium transition-colors"
+                className="px-4 py-2 bg-red-100 text-red-900 rounded hover:bg-red-200 font-medium transition-colors"
                 data-testid="toggle-cancel-options"
               >
                 {expandedBookingId === booking._id ? "Hide Cancel Options" : "Cancel Seats"}
@@ -232,7 +235,7 @@ const BookingCard = () => {
                       }
                       className={`px-4 py-2 rounded font-medium ${
                         isCancelling || (selectedSeats[booking._id]?.length || 0) === 0
-                          ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                          ? "bg-gray-200 text-gray-600 cursor-not-allowed"
                           : "bg-red-600 text-white hover:bg-red-700"
                       }`}
                       data-testid={

@@ -156,12 +156,14 @@ const renderSeats = () => {
             <p className="text-gray-700"><span className="font-semibold">Arrival:</span> {new Date(tripData.arrival_time).toLocaleString()}</p>
             <p className="text-gray-700 mt-2">
               <span className="font-semibold">Status:</span> 
-              <span className={`font-medium ${
-                tripData.status === "scheduled" ? "text-green-600" : 
-                tripData.status === "cancelled" ? "text-red-600" : "text-blue-600"
-              }`}>
-                {tripData.status.charAt(0).toUpperCase() + tripData.status.slice(1)}
-              </span>
+            <span className={`font-semibold px-2 py-1 rounded-md text-sm ${
+  tripData.status === "scheduled" ? "text-green-800 bg-green-100" :
+  tripData.status === "cancelled" ? "text-red-800 bg-red-100" :
+  "text-blue-800 bg-blue-100"
+}`}>
+  {tripData.status.charAt(0).toUpperCase() + tripData.status.slice(1)}
+</span>
+
             </p>
           </div>
         </div>

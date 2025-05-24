@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { User, Lock, Phone, UserCheck, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { RegisterUser } from '../../types/user/userTypes';
 import { useRegisterUserMutation } from '../../services/userApi';
@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerSuccess } from '../../store/user/userSlice';
 import { RootState } from '../../store/index';
 import { useNavigate } from 'react-router-dom';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 const initialFormData: RegisterUser = {
   name: '',
@@ -14,7 +16,6 @@ const initialFormData: RegisterUser = {
   password: '',
   role: 'user',
 };
-
 export const validateRegistrationForm = (formData: RegisterUser): {
   valid: boolean;
   errors: Partial<RegisterUser>;
@@ -72,8 +73,6 @@ export default function RegistrationForm() {
     }
     if (submitError) setSubmitError(null);
   };
-
-
   const validateForm = () => {
     const { valid, errors: newErrors } = validateRegistrationForm(formData);
     setErrors(newErrors);
@@ -95,12 +94,19 @@ export default function RegistrationForm() {
         }));
         navigate('/trip');
         }
-    } catch (err: any) {
-      console.error('Registration error:', err);
-      setSubmitError(err?.data?.message || 'Registration failed. Please try again.');
+    } catch (err) {
+      type CustomError = FetchBaseQueryError | SerializedError;
+    const error = err as CustomError;
+
+    console.error('Registration error:', error);
+
+    if ('data' in error && typeof error.data === 'object' && error.data !== null && 'message' in error.data) {
+      setSubmitError((error.data as { message: string }).message);
+    } else {
+      setSubmitError('Registration failed. Please try again.');
     }
   }
-
+  }
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     navigate('/login');
@@ -125,8 +131,7 @@ export default function RegistrationForm() {
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <User className="h-5 w-5 text-gray-400" />
             </div>
-            <input
-              id="name"
+            <input id="name"
               name="name"
               type="text"
               value={formData.name}
@@ -184,13 +189,15 @@ export default function RegistrationForm() {
             />
             <button
               type="button"
+              name="ShowPassword"
+              aria-label="Close"
               onClick={() => setShowPassword(!showPassword)}
               className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
               {showPassword ? (
                 <EyeOff className="h-5 w-5 text-gray-400" />
               ) : (
-                <Eye className="h-5 w-5 text-gray-400" />
+                <Eye className="h-5 w-5 text-gray-400"  />
               )}
             </button>
           </div>

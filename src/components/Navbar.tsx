@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bookingApi } from "../services/bookingApi"; 
 import { tripApi } from "../services/tripApi"; 
 import { userApi } from "../services/userApi";
